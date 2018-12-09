@@ -60,7 +60,6 @@ class KidsGameThread(private val surfaceHolder: SurfaceHolder, private val gameV
                 var averageFPS = 1000 / (totalTime / frameCount / 1000000)
                 frameCount = 0
                 totalTime = 0
-                System.out.println("yesss " + averageFPS)
             }
         }
 

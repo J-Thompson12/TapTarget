@@ -42,7 +42,6 @@ class Animations(private var bmp: Bitmap, private var numColumns: Int, private v
         val time = System.currentTimeMillis()
         if (currentFrame < numColumns * numRows) {
             if (time > lastFrameChangeTime + frameLengthInMillisecond) {
-                println("Time " + time + " lastFrame" + lastFrameChangeTime+ 100)
                 lastFrameChangeTime = time
                 currentFrame++
                 currentColumn++
