@@ -219,21 +219,19 @@ class GameView(context: Context, attributes: AttributeSet) : SurfaceView(context
 
     private fun addTarget(){
         var time = System.currentTimeMillis()
-        var randObject = Random(time).nextInt(1,9)
+        var randObject = Random(time + seed).nextInt(1,9)
         var target: Target? = null
         when(randObject){
             1,2,3,4,5,6 -> target = Target(targetBmp, seed)
             7,8 -> target = Target(bombBmp, seed)
         }
 
-        var movement = Random(time).nextInt(1, 3)
         if (target != null) {
             if(randObject == 7 || randObject == 8){
                 target.isBomb = true
             }
-            when (movement) {
-                1 -> target.isMoving(false)
-                2 -> target.isMoving(true)
+            if (randObject == 2 || randObject == 4 || randObject == 6 || randObject == 8){
+                target.isMoving(true)
             }
             targets.add(target)
         }

@@ -131,8 +131,7 @@ class KidsGameView(context: Context, attributes: AttributeSet) : SurfaceView(con
         canvas.drawBitmap(myCanvasBitmap, identityMatrix, null)
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event!!.actionMasked == MotionEvent.ACTION_DOWN) {
+    override fun onTouchEvent(event: MotionEvent): Boolean {
             touched = false
             for (target in targets) {
                 if (target.isTouched(event) && !target.isBomb) {
@@ -153,13 +152,12 @@ class KidsGameView(context: Context, attributes: AttributeSet) : SurfaceView(con
                     break
                 }
             }
-        }
         return true
     }
 
     private fun addTarget(){
         var time = System.currentTimeMillis()
-        var randObject = Random(time).nextInt(1,9)
+        var randObject = Random(time + seed).nextInt(1,9)
         var target: Target? = null
         when(randObject){
             1,2,3,4 -> target = Target(targetBmp, seed)
@@ -167,14 +165,12 @@ class KidsGameView(context: Context, attributes: AttributeSet) : SurfaceView(con
         }
 
         if (target != null) {
-            if(randObject == 5 || randObject == 6 || randObject == 7 || randObject == 8){
+            if (randObject == 5 || randObject == 6 || randObject == 7 || randObject == 8) {
                 target.isBomb = true
             }
-            var movement = Random(time).nextInt(1, 3)
-            when (movement) {
-                1 -> target.isMoving(false)
-                2 -> target.isMoving(true)
-            }
+            if (randObject == 2 || randObject == 4 || randObject == 6 || randObject == 8){
+                target.isMoving(true)
+             }
             targets.add(target)
         }
     }
